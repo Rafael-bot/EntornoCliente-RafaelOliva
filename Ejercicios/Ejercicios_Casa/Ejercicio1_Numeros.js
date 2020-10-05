@@ -11,7 +11,7 @@ function num_random(max, min) {
         if (numRandom == num) { //Si es igual al ultimo numero, se genera otro numero
             numRandom = Math.floor(Math.random() * (max - min));
             num = numRandom; //Almacenamos el numero
-            numeros[numCont] = numRandom; //Añadimos al array de numeros
+            numeros[cont] = numRandom; //Añadimos al array de numeros
         } else {
             num = numRandom; //Almacenamos el numero
             numeros[cont] = numRandom; //Añadimos al array de numeros
