@@ -49,13 +49,14 @@ function arrayTexto() {
  * Crear función que cuente cuantas cuantos valores de una array son ‘true’. Devuelve 0 si el array está vacio.
  */
 
-function contValoresTrues(array) {
-  document.write("<br>"); // Saltos d linea
+function contadorValoresTrues(array_booleans) {
+  document.write(`<br>`);
 
-  if (array === "") {
-    console.log("0");
+  let veces_repetidas = array_booleans.filter((bolean) => bolean == true).length; //Con el metodo filter estamos filtrando los elementos trues y despues lo contamos con el metodo length.
+  if (array_booleans.length > 0) {
+    document.write(`Hay ${veces_repetidas} trues.`);
   } else {
-    console.log("dentro");
+    document.write(`Hay 0 trues.`);
   }
 
   document.write(`<br>`);
@@ -69,9 +70,11 @@ function contValoresTrues(array) {
 
 function busca_siete(array_num) {
   document.write(`<br>`);
-  if (array_num.indexOf(7) == -1) {//Si el 7 no esta en el array el numero que dara sera -1, y imprimira lo siguiente.
+  if (array_num.indexOf(7) == -1) {
+    //Si el 7 no esta en el array el numero que dara sera -1, y imprimira lo siguiente.
     document.write("No hay 7 en el array.");
-  } else {//Si no, significa que lo ha encontrado.
+  } else {
+    //Si no, significa que lo ha encontrado.
     document.write("Boom!");
   }
   document.write(`<br>`);
@@ -81,19 +84,22 @@ function busca_siete(array_num) {
  * Duplicar los elementos de un array usando: forEach(), map() y reduce().
  */
 
- function array_duplicado(array_dup){
-    document.write(`<br>`);
+function array_duplicado(array_dup) {
+  document.write(`<br>`);
 
-    document.write(`${array_dup} => ${array_dup.map(function(num) {return num * 2;})}`);//con el metodo map() le estamos aplicando una funcion a cada elemento del array, y despues imprimimos el array ya cambiadp
-    
-    document.write(`<br>`);
- }
+  document.write(
+    `${array_dup} => ${array_dup.map(function (num) {
+      return num * 2;
+    })}`
+  ); //con el metodo map() le estamos aplicando una funcion a cada elemento del array, y despues imprimimos el array ya cambiadp
 
+  document.write(`<br>`);
+}
 
 arrayTexto();
 const array_siete = [8, 66, 7, 1];
 busca_siete(array_siete);
-const array_dup = [8,6,2,6.3,8,2.2];
+const array_dup = [8, 6, 2, 6.3, 8, 2.2];
 array_duplicado(array_dup);
-
-
+const array_trues = [true, false, true, true];
+contadorValoresTrues(array_trues);
