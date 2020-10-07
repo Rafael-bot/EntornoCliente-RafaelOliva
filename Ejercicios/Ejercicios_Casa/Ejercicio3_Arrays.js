@@ -9,7 +9,7 @@
  */
 
 function arrayTexto() {
-  document.write(`<br> <br>`); // Saltos d linea
+  document.write(`<br>`); // Saltos d linea
   try {
     let user_frase = prompt("Introduce un texto:"); //Aqui el usuario va a introducir la frase
 
@@ -42,7 +42,7 @@ function arrayTexto() {
     alert("No has introducido nada.");
   }
 
-  document.write("<br> <br>");
+  document.write("<br>");
 }
 
 /**
@@ -50,7 +50,7 @@ function arrayTexto() {
  */
 
 function contValoresTrues(array) {
-  document.write("<br> <br>"); // Saltos d linea
+  document.write("<br>"); // Saltos d linea
 
   if (array === "") {
     console.log("0");
@@ -58,7 +58,7 @@ function contValoresTrues(array) {
     console.log("dentro");
   }
 
-  document.write(`<br> <br>`);
+  document.write(`<br>`);
 }
 
 /**
@@ -68,25 +68,32 @@ function contValoresTrues(array) {
   */
 
 function busca_siete(array_num) {
-  document.write(`<br> <br>`);
+  document.write(`<br>`);
   if (array_num.indexOf(7) == -1) {//Si el 7 no esta en el array el numero que dara sera -1, y imprimira lo siguiente.
     document.write("No hay 7 en el array.");
   } else {//Si no, significa que lo ha encontrado.
     document.write("Boom!");
   }
-  document.write(`<br> <br>`);
+  document.write(`<br>`);
 }
 
 /**
  * Duplicar los elementos de un array usando: forEach(), map() y reduce().
  */
 
-arrayTexto();
+ function array_duplicado(array_dup){
+    document.write(`<br>`);
 
+    document.write(`${array_dup} => ${array_dup.map(function(num) {return num * 2;})}`);//con el metodo map() le estamos aplicando una funcion a cada elemento del array, y despues imprimimos el array ya cambiadp
+    
+    document.write(`<br>`);
+ }
+
+
+arrayTexto();
 const array_siete = [8, 66, 7, 1];
 busca_siete(array_siete);
+const array_dup = [8,6,2,6.3,8,2.2];
+array_duplicado(array_dup);
 
-/*
-let array = [,,];
-contValoresTrues(array);
-*/
+
