@@ -21,47 +21,106 @@ sweetestIcecream([ice3, ice1]) ➞ 23
 sweetestIcecream([ice3, ice5]) ➞ 17
  */
 
-class IceCream{
-    //Constructor
-    constructor(sabor,pizca){
-        this.sabor = sabor;
-        this.pizca = pizca;
-    }
-    //Get
-    get dulzura(){
-        return this.calc_dulzura();
-    }
-    //Method
-    calc_dulzura(){
-        const valores_dulzura = [0,5,10] 
-        if(this.sabor == 'Plain'){
-            return this.pizca+valores_dulzura[0];
-        } else if(this.sabor == 'Vanilla'){
-            return this.pizca+valores_dulzura[1];
-        } else if(this.sabor=='ChocolateChip'){
-            return this.pizca+valores_dulzura[1];
-        } else if(this.sabor=='Strawberry'){
-            return this.pizca+valores_dulzura[2];
-        } else if(this.sabor=='Chocolate'){
-            return this.pizca+valores_dulzura[2];
-        } else {
-            return 'Este sabor no esta.';
-        }
-    }
+function elmasdulzoso(helados){
+   /*const dulzuras = {
+    'Plain':0,
+    'Vanilla':5,
+    'ChocolateChip':5,
+    'Strawberry':10,
+    'Chocolate':10
+  }*/
+  //let result = Math.max(...helados.map(function(h){return dulzuras[h.sabor]+h.pizca;}));
+  return Math.max(...helados.map(function(h){return {'Plain':0,'Vanilla':5,'ChocolateChip':5,'Strawberry':10,'Chocolate':10}[h.sabor]+h.pizca;}));
 }
-function helado_dulce(helados){
-    let result = helados.map(function(h) {
-        return Math.max(h.dulzura);
-    });
-     return result[0];
- }
 
-ice1 = new IceCream("Chocolate", 13);       
-ice2 = new IceCream("Vanilla", 0);          
-ice3 = new IceCream("Strawberry", 7);        
-ice4 = new IceCream("Plain", 18);             
+class IceCream {
+  //Constructor
+  constructor(sabor, pizca) {
+    this.sabor = sabor;
+    this.pizca = pizca;
+  }
+}
+
+let ice1 = new IceCream("Chocolate", 13);
+let ice2 = new IceCream("Vanilla", 0);
+let ice3 = new IceCream("Strawberry", 7);
+let ice4 = new IceCream("Plain", 18);
+let ice5 = new IceCream("ChocolateChip", 3);
+const helados = [ice3, ice5];
+document.write(`${elmasdulzoso(helados)}`);
+
+/*class IceCream {
+  //Constructor
+  constructor(sabor, pizca) {
+    this.sabor = sabor;
+    this.pizca = pizca;
+  }
+  //Get
+  get dulzura() {
+    return this.calc_dulzura();
+  }
+  //Method
+  calc_dulzura() {
+    const valores_dulzura = [0, 5, 10];
+    if (this.sabor == "Plain") {
+      return this.pizca + valores_dulzura[0];
+    } else if (this.sabor == "Vanilla") {
+      return this.pizca + valores_dulzura[1];
+    } else if (this.sabor == "ChocolateChip") {
+      return this.pizca + valores_dulzura[1];
+    } else if (this.sabor == "Strawberry") {
+      return this.pizca + valores_dulzura[2];
+    } else if (this.sabor == "Chocolate") {
+      return this.pizca + valores_dulzura[2];
+    } else {
+      return "Este sabor no esta.";
+    }
+  }
+}
+function helado_dulce(helados) {
+  let result = helados.map(function (h) {
+    return Math.max(h.dulzura);
+  });
+  return result[0];
+}
+
+ice1 = new IceCream("Chocolate", 13);
+ice2 = new IceCream("Vanilla", 0);
+ice3 = new IceCream("Strawberry", 7);
+ice4 = new IceCream("Plain", 18);
 ice5 = new IceCream("ChocolateChip", 3);
 
-const helados = [ice1, ice2, ice3, ice4, ice5];
-document.write(`${helado_dulce(helados)}`);
+const helados = [ice3, ice5];
+document.write(`${helado_dulce(helados)} <br>`);*/
 
+
+
+/**
+ * Clase círculo
+ * Su tarea es crear un constructor de Círculos que cree un círculo con un radio proporcionado por un argumento.
+ * Los círculos construidos deben tener dos captadores getArea () (PIr ^ 2) y getPerimeter () (2PI * r) que dan tanto las áreas respectivas como el perímetro (circunferencia).     
+
+let circy = new Circle(11);
+circy.getArea();
+// Should return 380.132711084365
+let circy = new Circle(4.44);
+circy.getPerimeter();
+// Should return 27.897342763877365
+ */
+
+ class circule{
+   //Constructure
+   constructor(radio){
+     this.radio = radio;
+   }
+   //Getter
+   get getArea(){return this.getArea()}
+   get getPerimeter(){return this.getPerimeter()}
+
+   //Method
+   getArea(){
+
+   }
+   getPerimeter(){}
+
+ }
