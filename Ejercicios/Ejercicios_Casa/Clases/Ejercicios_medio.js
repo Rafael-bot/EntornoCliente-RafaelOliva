@@ -21,8 +21,8 @@ sweetestIcecream([ice3, ice1]) ➞ 23
 sweetestIcecream([ice3, ice5]) ➞ 17
  */
 
-function elmasdulzoso(helados){
-   /*const dulzuras = {
+function elmasdulzoso(helados) {
+  /*const dulzuras = {
     'Plain':0,
     'Vanilla':5,
     'ChocolateChip':5,
@@ -30,7 +30,21 @@ function elmasdulzoso(helados){
     'Chocolate':10
   }*/
   //let result = Math.max(...helados.map(function(h){return dulzuras[h.sabor]+h.pizca;}));
-  return Math.max(...helados.map(function(h){return {'Plain':0,'Vanilla':5,'ChocolateChip':5,'Strawberry':10,'Chocolate':10}[h.sabor]+h.pizca;}));
+
+  //Obtenemos la dulzaro mayor de todos los sabores
+  return Math.max(
+    ...helados.map(function (h) {
+      return (//Obtenemos el numero del sabor y lo sumamos con el numero de pizca del parametro
+        {
+          Plain: 0,
+          Vanilla: 5,
+          ChocolateChip: 5,
+          Strawberry: 10,
+          Chocolate: 10,
+        }[h.sabor] + h.pizca
+      );
+    })
+  );
 }
 
 class IceCream {
@@ -47,7 +61,7 @@ let ice3 = new IceCream("Strawberry", 7);
 let ice4 = new IceCream("Plain", 18);
 let ice5 = new IceCream("ChocolateChip", 3);
 const helados = [ice3, ice5];
-document.write(`${elmasdulzoso(helados)}`);
+document.write(`${elmasdulzoso(helados)}<br>`);
 
 /*class IceCream {
   //Constructor
@@ -93,12 +107,10 @@ ice5 = new IceCream("ChocolateChip", 3);
 const helados = [ice3, ice5];
 document.write(`${helado_dulce(helados)} <br>`);*/
 
-
-
 /**
  * Clase círculo
  * Su tarea es crear un constructor de Círculos que cree un círculo con un radio proporcionado por un argumento.
- * Los círculos construidos deben tener dos captadores getArea () (PIr ^ 2) y getPerimeter () (2PI * r) que dan tanto las áreas respectivas como el perímetro (circunferencia).     
+ * Los círculos construidos deben tener dos captadores getArea () (PI*r^2) y getPerimeter () (2*PI*r) que dan tanto las áreas respectivas como el perímetro (circunferencia).     
 
 let circy = new Circle(11);
 circy.getArea();
@@ -108,19 +120,23 @@ circy.getPerimeter();
 // Should return 27.897342763877365
  */
 
- class circule{
-   //Constructure
-   constructor(radio){
-     this.radio = radio;
-   }
-   //Getter
-   get getArea(){return this.getArea()}
-   get getPerimeter(){return this.getPerimeter()}
+class Circule {
+  //Constructure
+  constructor(radio) {
+    this.radio = radio;
+  }
+  //Method
+  getArea() {
+    return Math.PI * Math.pow(this.radio, 2);
+  }
+  getPerimeter() {
+    return 2 * Math.PI * this.radio;
+  }
+}
+let circule1 = new Circule(11);
+document.write(`${circule1.getArea()}<br>`);
+document.write(`${circule1.getPerimeter()}<br>`);
 
-   //Method
-   getArea(){
-
-   }
-   getPerimeter(){}
-
- }
+let circule2 = new Circule(4.44);
+document.write(`${circule2.getPerimeter()}<br>`);
+document.write(`${circule2.getArea()}<br>`);
