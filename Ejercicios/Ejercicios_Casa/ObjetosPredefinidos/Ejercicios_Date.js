@@ -25,8 +25,13 @@ document.write(`${esNocheBuena(fecha1)} <br>`);
  */
 
 function convertFecha(fecha){
-    return fecha.split('/').reverse().join('');//con el split dividimos por las barra, lo invertimos con el reverse y lo unimos todo con en join.
+    //Solucion 1
+    //return fecha.split('/').reverse().join('');//con el split dividimos por las barra, lo invertimos con el reverse y lo unimos todo con en join.
+    //Solucion 2
+    let result = new Date(fecha);
+    return String(result.getFullYear()) + String(result.getDate()) + String(result.getMonth()+1);//Cuando hagas un getMount siempre hay que sumarle uno mas para que se muertre el mes exacto
 }
-const fecha2 = "18/12/2219";
-document.write(`${convertFecha(fecha2)}`);
+const fecha2 = "11/12/2019";
+document.write(`${fecha2} -> ${convertFecha(fecha2)}<br>`);
+
 
