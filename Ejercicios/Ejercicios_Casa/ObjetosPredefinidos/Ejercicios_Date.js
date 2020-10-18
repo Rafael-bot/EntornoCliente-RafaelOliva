@@ -35,3 +35,17 @@ const fecha2 = "11/12/2019";
 document.write(`${fecha2} -> ${convertFecha(fecha2)}<br>`);
 
 
+/**Extraer el día de la semana de la fecha dada
+ * Escriba una función que, dada una fecha (en el formato MM / DD / AAAA), devuelva el día de la semana como una cadena. 
+ * El nombre de cada día debe ser una de las siguientes cadenas: "domingo", "lunes", "martes", "miércoles", "jueves", "viernes" o "sábado".
+ getDay("12/07/2016") ➞ "Wednesday"
+ getDay("09/04/2016") ➞ "Sunday"
+ getDay("12/08/2011") ➞ "Thursday"
+ */
+function diaSemana(fecha){
+    let result = new Date(fecha);
+    let dias = new Array("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday");
+    return dias[result.getDay()];//Sacamos con el getDay el nombre del dia de la semana, y lo buscamos en el array creado. Y lo retornamos.
+}
+const fecha3 = "12/07/2016";
+document.write(`${diaSemana(fecha3)}`);
