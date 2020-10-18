@@ -5,7 +5,7 @@ isLastCharacterN("Piet") ➞ false
 isLastCharacterN("Bert") ➞ false
 isLastCharacterN("Dean") ➞ true
  */
-const result = (palabra) => {
+const detectarUltiLetra = (palabra) => {
   /*Solucion 1
   return palabra.toLowerCase()[palabra.length - 1] === "n";//[palabra.length-1] le indicamos la ultima posicion y la comparamos.*/
   //Solucion 2
@@ -13,4 +13,18 @@ const result = (palabra) => {
   return r.test(palabra.toLowerCase());//con el metodo test probamos si el ultimo caracter es n, si lo es retornara true si no retornara false.
 }; 
 const palabra1 = "Aiden";
-document.write(`${result(palabra1)}`);
+document.write(`${detectarUltiLetra(palabra1)} <br>`);
+
+/**Extraer el nombre de un fichero (con su extensión) de una ruta
+ * Cree una función que devuelva el nombre de archivo seleccionado de una ruta. Incluya la extensión en su respuesta.
+getFilename("C:/Projects/pil_tests/ascii/edabit.txt") ➞ "edabit.txt"
+getFilename("C:/Users/johnsmith/Music/Beethoven_5.mp3") ➞ "Beethoven_5.mp3"
+getFilename("ffprobe.exe") ➞ "ffprobe.exe"
+ */
+
+const extraerNombFichero = (path) => {
+    let result = path.split('/');
+    return path.split('/')[result.length-1];
+}
+let path = "C:/Users/johnsmith/Music/Beethoven_5.mp3";
+document.write(`${extraerNombFichero(path)}`);
