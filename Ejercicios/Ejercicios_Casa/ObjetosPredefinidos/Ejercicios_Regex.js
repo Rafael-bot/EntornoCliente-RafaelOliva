@@ -27,4 +27,18 @@ const extraerNombFichero = (path) => {
     return path.split('/')[result.length-1];
 }
 let path = "C:/Users/johnsmith/Music/Beethoven_5.mp3";
-document.write(`${extraerNombFichero(path)}`);
+document.write(`${extraerNombFichero(path)}<br>`);
+
+/**Reemplazar todas las vocales por un caracter dado
+ * Cree una función que reemplace todas las vocales de una cadena con un carácter específico.
+replaceVowels("the aardvark", "#") ➞ "th# ##rdv#rk"
+replaceVowels("minnie mouse", "?") ➞ "m?nn?? m??s?"
+replaceVowels("shakespeare", "*") ➞ "sh*k*sp**r*"
+ */
+const reemplazarVocalesCaracter = (texto,caracter) => {
+    return texto.replace(/[aeiou]/gi,caracter);/*con el /[aeiou]/ seleccionamos todas la vocale mayusculas minucular  con tildes etc y lo remplazamo*/
+}
+const text ='the aardvark';
+const caract = '#';
+document.write(`${reemplazarVocalesCaracter(text,caract)}`);
+
