@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>DOM 1</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        function verDOM() {
+            const html = document.documentElement;
+            //const head = html.childNodes[0];
+            const head = html.firstChild;
+            const body = document.body;
+            //const body = html.lastChild;
+            //const body = html.childNodes[1];
+            const nElement = body.childNodes.length;
+            alert(body);
+
+        }
+    </script>
+</body>
+<p>Soy un parrafo.</p>
+<p>Soy un parrafo.</p>
+<p>Soy un parrafo.</p>
+<button onclick="verDOM()">Pulsame</button>
+
+</html>
