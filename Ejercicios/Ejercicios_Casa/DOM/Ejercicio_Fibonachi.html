@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fibonacci</title>
+    <script type="text/javascript">
+        /**Fionachi
+         * Cada vez que pulse un boton añade el siguiente N de la serie.
+         */
+        function fibonacciNums() {
+            let li = document.createElement("li");//Creamos el elemento li
+            let linodescount = document.getElementById('fibo').childElementCount;//Contamos el numeros de elementos del ul con el id fibo
+            let textli;//Creamos la variable donde se va a usar para crear los nodos tipo texto
+            if (linodescount == 0 || linodescount == 1) {//Si hay 0 o 1 elemento
+                textli = document.createTextNode(1);//Creamos el nodo con valor 1
+            } else {
+                let linodes = document.getElementById('fibo').childNodes;//Obtenemos los elementos hijos con el chidNodes
+                textli = document.createTextNode(parseInt(linodes[linodes.length - 1].innerText) + parseInt(linodes[linodes.length - 2].innerText));//Creamos el nodo donde sumamos el ultimo elemento hijo y el penultimo. Lo extraemos con el innerText
+            }
+            li.appendChild(textli);//Añadimos el nodo creado al elemento creado previamente
+            document.getElementById("fibo").appendChild(li);//Añadimos en el ul el li
+        }
+    </script>
+
+</head>
+
+<body>
+    <button onclick="fibonacciNums()">Pulsame</button>
+    <ul id="fibo"></ul>
+
+</body>
+
+</html>
