@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambiar color del fondo</title>
+    <script type="text/javascript">
+        function colorFondo(select) {//Pedimos como parametro el elemento selector
+            if (select.value == 'azar') {//con l value le estamos extrallendo el valor del atributo value. Si es azar eligira un color aleatorio
+                const colores = ['red', 'yellow', 'blue', 'purple', 'green'];//Lista de colores
+                const numal = Math.floor(Math.random() * (5 - 0)) + 0;//Generamos un numero alearotio, que se la posicion de la lista de colores
+                document.body.style.backgroundColor = colores[numal];//Le introducimos un color aleatorio al atributo background color.
+            } else {
+                document.body.style.backgroundColor = select.value;//Le introducimos el color elegido al atributo backfground-color del body
+            }
+
+        }
+    </script>
+</head>
+
+<body>
+    <center>
+        <select name="fondo" id="colorfond" onclick="colorFondo(this)"><!--Con el this le estamos indicando que argumento en el propio select-->
+            <option value="red">Rojo</option>
+            <option value="yellow">Amarillo</option>
+            <option value="blue">Azul</option>
+            <option value="purple">Morado</option>
+            <option value="green">Verde</option>
+            <option value="azar">Azar</option>
+        </select>
+    </center>
+</body>
+
+</html>
