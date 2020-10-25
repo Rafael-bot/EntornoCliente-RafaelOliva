@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambiar texto de un input</title>
+    <script type="text/javascript">
+        function cambInput(boton) {
+            let btn = boton.getAttribute('id');//obtenemos el valor del atributo del boton
+            let input = document.getElementById('text_input');
+            if (btn == 'primero') {//SI el valor del atributo id es primero, el input cogera como valor Escarabajo
+                input.value = 'Escarabajo'
+            } else if (btn == 'segundo') {  
+                input.value = 'Caca'
+            } else {
+                input.value = 'Ponche'
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <center>
+        <input type="text" id="text_input">
+        <br>
+        <button id="primero" onclick="cambInput(this)">PRIMERA PALABRA</button>
+        <button id="segundo" onclick="cambInput(this)">SEGUNDA PALABRA</button>
+        <button id="tercero" onclick="cambInput(this)">TERCERA PALABRA</button>
+    </center>
+</body>
+
+</html>
