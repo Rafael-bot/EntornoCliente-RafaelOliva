@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tablero Ajedrez</title>
+    <style type="text/css">
+        button {
+            margin: 10px;
+        }
+
+        table {
+            background-color: rgb(236, 223, 223);
+            border: 2px solid black;
+            position: fixed;
+        }
+
+        td {
+            width: 20px;
+            height: 20px;
+        }
+
+        p {
+            text-align: center;
+        }
+
+        #negro {
+            border: 2px solid black;
+            background-color: black;
+        }
+
+        #blanco {
+            border: 2px solid black;
+            background-color: white;
+        }
+    </style>
+    <script type="text/javascript">
+        function mostrarAjedrez() {
+
+            // Obtener la referencia del elemento body
+            var body = document.getElementsByTagName("body")[0];
+
+            // Crea un elemento <table>
+            let tabla = document.createElement("table");
+
+            // Creo la lista de letras
+            letras = [' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+
+            //Creo el controlador de las blancas y negras
+            let control = 0;
+
+            //Creo el indice numero
+            let indicnum = 8;
+
+            //Creo la lista de los numero que indica la posicion
+            indicnum = [, 8, 7, 6, 5, 4, 3, 2, 1];//La primera posicion esta vacia por que contamos de fila en fila y la primera fila ya esta ocupada por las letras.
+
+            // Crea las celdas
+            for (let contfilas = 0; contfilas < 10; contfilas++) {
+                // Crea las hileras de la tabla
+                let hilera = document.createElement("tr");
+
+
+                for (let contceldas = 0; contceldas < 10; contceldas++) {
+                    // Crea un elemento <td> y un nodo de texto, haz que el nodo de
+                    // texto sea el contenido de <td>, ubica el elemento <td> al final
+                    // de la hilera de la tabla
+                    let celda = '';
+                    let textoCelda = '';
+
+                    if (contfilas == 0 || contfilas == 9) {
+                        if (contceldas == 0 || contceldas == 9) {
+                            celda = document.createElement("th");
+                            textoCelda = document.createTextNode('');
+                        } else {
+                            celda = document.createElement("th");
+                            textoCelda = document.createTextNode(letras[contceldas]);
+                        }
+                    } else {
+                        if (contceldas == 0 || contceldas == 9) {
+                            celda = document.createElement("th");
+                            textoCelda = document.createTextNode(indicnum[contfilas]);
+                        } else {
+                            celda = document.createElement("td");
+                            textoCelda = document.createTextNode(' ');
+                            if (contfilas % 2 == contceldas % 2) {
+                                celda.setAttribute('id', 'blanco');
+                            } else {
+                                celda.setAttribute('id', 'negro');
+                            }
+                        }
+                    }
+                    celda.appendChild(textoCelda);
+                    hilera.appendChild(celda);
+                }
+
+                // agrega la hilera al final de la tabla (al final del elemento tblbody)
+                tabla.appendChild(hilera);
+            }
+
+            body.appendChild(tabla);
+        }
+    </script>
+</head>
+
+<body>
+    <button onclick="mostrarAjedrez()">Mostrar Tablero</button>
+</body>
+
+</html>
