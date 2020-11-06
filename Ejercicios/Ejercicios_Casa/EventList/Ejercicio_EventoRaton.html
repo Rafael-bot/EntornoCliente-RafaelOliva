@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Mouse</title>
+    <script type="text/javascript">
+        function click1() {
+            console.log('Pulsaste click!!!');
+        }
+
+        function click2() {
+            console.log('Pulsaste dos clicks!!!')
+        }
+
+        function coord(e) {
+            var cursorX = e.pageX;
+            var cursorY = e.pageY;
+            document.getElementById('cord').innerHTML = cursorX + ',' + cursorY;
+        }
+    </script>
+</head>
+
+<body onmousemove="coord(event)">
+    <input type="button" name="pulsame" id="puls" value="Pulsame" ondblclick="click2()" onclick="click1()">
+    <div>
+        <p>Coord:</p>
+        <p id="cord"></p>
+    </div>
+</body>
+
+</html>
