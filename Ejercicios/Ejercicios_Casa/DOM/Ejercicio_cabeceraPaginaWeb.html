@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cabecera de pagina web</title>
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: auto;
+            text-align: center
+        }
+
+        #cabecera {
+            background-color: #3027d6;
+        }
+
+        h1 {
+            font: bold 1.5em arial;
+            padding: 0.5em;
+            color: white;
+        }
+
+        #navegador {
+            padding: 0.5em;
+        }
+
+        #navegador div {
+            margin: 0px 5px;
+            padding: 0.1em 1em 0.5em 1em;
+            background-color: #2b5fdd;
+            width: 12%;
+            float: left;
+            list-style-type: none;
+            position: relative;
+        }
+        #navegador div a {
+            text-decoration: none;
+            color: #a0c1db;
+            position: relative;
+        }
+    </style>
+    <script type="text/javascript">
+        function cambColor(e){
+            const secAttribute =e.getAttribute('id');
+            const seccions = document.getElementById('navegador');
+            const hijosSeccions = seccions.childElementCount;
+            for (cont = 1; cont<=hijosSeccions;cont++){
+                if (document.getElementById(`sec${cont}`).getAttribute('id')!=secAttribute){
+                    document.getElementById(`sec${cont}`).setAttribute('style','background-color: #2b5fdd;');
+                    document.getElementById(`sec${cont}`).firstElementChild.setAttribute('style','color: #a0c1db;');
+                }else{
+                    e.setAttribute('style','background:#CFD6D5;');
+                    e.firstElementChild.setAttribute('style','color:#BB4EF9;');
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<div id="cabecera">
+    <h1>Mi sitio Web</h1>
+</div>
+<div id="navegador">
+
+        <div id="sec1" onclick="cambColor(this)">
+            <a href="#" >Inicio</a>
+        </div>
+        <div id="sec2" onclick="cambColor(this)">
+            <a href="#">Blog</a>
+        </div>
+        <div id="sec3" onclick="cambColor(this)">
+            <a href="#">Sobre mi</a>
+        </div>
+        <div id="sec4" onclick="cambColor(this)">
+            <a href="#">Fotos</a>
+        </div>
+        <div id="sec5" onclick="cambColor(this)">
+            <a href="#">Porfolio</a>
+        </div>
+        <div id="sec6" onclick="cambColor(this)">
+            <a href="#" onclick="cambColor(this)">Contacto</a>
+        </div>
+        <div id="sec7" onclick="cambColor(this)">
+            <a href="#">Enlaces</a>
+        </div>
+
+
+</div>
+</body>
+</html>
