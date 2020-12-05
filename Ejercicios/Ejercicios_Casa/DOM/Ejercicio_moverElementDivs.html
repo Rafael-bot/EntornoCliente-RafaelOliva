@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mover elemento del div</title>
+    <style type="text/css">
+        #divPadre{
+            position: absolute;
+            left: 20%;
+            top: 20%;
+            width: 50%;
+            padding: 10%;
+            border: 2px solid black;
+        }
+        #divHijo1{
+            position: absolute;
+            top: 30%;
+            left: 20%;
+            border: 2px solid black;
+
+        }
+        #divHijo2{
+            position: absolute;
+            top: 30%;
+            left: 70%;
+            border: 2px solid black;
+        }
+    </style>
+    <script type="text/javascript">
+
+        function moverElemento(e){
+            /*Variable donde almacenamo Elemento hijo1*/
+            const hijo1 = document.getElementById('divHijo1');
+            /*Hijos del hijo1*/
+            const hijo1children = document.getElementById('divHijo1').children;
+            /*Variable donde almacenamo Elemento hijo2*/
+            const hijo2 = document.getElementById('divHijo2');
+            /*Hijos del hijo2*/
+            const hijo2children = document.getElementById('divHijo2').children;
+            /*Tamaño de los elementos del hijo1*/
+            const countHijo1 =  hijo1.childElementCount;
+            /*Tamaño de los elementos del hijo2*/
+            const countHijo2 =  hijo2.childElementCount;
+
+            for (cont=0;cont<countHijo1;cont++){/*Recoremo todos los elementos del hijo1*/
+                if(hijo1children[cont] == e) {
+                    hijo1.removeChild(e);
+                    hijo2.append(e);
+                }
+            }
+            for (cont=0;cont<countHijo2;cont++){/*Recoremo todos los elementos del hijo2*/
+                if(hijo2children[cont] == e){
+                    hijo2.removeChild(e);
+                    hijo1.append(e);
+                }
+            }
+
+        }
+    </script>
+</head>
+<body>
+    <div id="divPadre">
+        <div id="divHijo1">
+            <div id="e2" onclick="moverElemento(this)"><li >ELemento 2</li></div>
+            <div id="e4" onclick="moverElemento(this)"><li >ELemento 4</li></div>
+        </div>
+        <div id="divHijo2">
+            <div id="e1" onclick="moverElemento(this)"><li >ELemento 1</li></div>
+            <div id="e3" onclick="moverElemento(this)"><li >ELemento 3</li></div>
+            <div id="e5" onclick="moverElemento(this)"><li >ELemento 5</li></div>
+        </div>
+    </div>
+</body>
+</html>
