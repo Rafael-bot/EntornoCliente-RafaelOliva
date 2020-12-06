@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cambiar imgagen</title>
+    <style type="text/css"></style>
+    <script type="text/javascript">
+        function changeImg(){
+            const numRandom = Math.random();
+            document.getElementById("img").removeAttribute('src');
+            document.getElementById("img").setAttribute('src',`https://picsum.photos/200/300?random=${numRandom}`);
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <img id="img" src="https://picsum.photos/200/300?random=1">
+        <button onclick="changeImg()">Cambiar</button>
+    </div>
+</body>
+</html>
