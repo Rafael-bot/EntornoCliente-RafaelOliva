@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Enhorabuen 7 segundos</title>
+    <script type="text/javascript">
+        function enhorabuena(){
+            let cont = 0;
+            let id = setInterval(function(){
+                alert('Enhorbuena!!!!')
+                cont++;
+                if(cont == 1){
+                    clearInterval(id);
+                    document.write('Pagina cargado correctamente!!!');
+                }
+            }, 7000);
+
+        }
+    </script>
+</head>
+<body onload="enhorabuena()">
+
+</body>
+</html>
