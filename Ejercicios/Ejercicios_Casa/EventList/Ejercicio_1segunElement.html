@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cada segun ELento</title>
+    <script type="text/javascript">
+            function segunElemente(){
+                let n = 0;
+                let l = document.getElementById("container");
+                window.setInterval(function(){
+                    let e = document.createElement('p').innerText = `${n}, `;
+                    l.append(e);
+                    n++;
+                },1000);
+            }
+    </script>
+</head>
+<body onload="segunElemente()">
+    <div id="container"></div>
+</body>
+</html>
