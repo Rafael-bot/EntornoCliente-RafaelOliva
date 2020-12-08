@@ -117,9 +117,9 @@
         }
     </style>
     <script>
-        function calendar(){
-            const date = new Date();/*creamos una variable donde utilizamos la clase Date*/
+        const date = new Date();/*creamos una variable donde utilizamos la clase Date*/
 
+        function calendar(){
             function renderCalendar() {
                 date.setDate(1);
                 /*Seleccionamos los elementos html conm la clase days*/
@@ -137,11 +137,11 @@
 
                 let days = "";/*Variable donde almacenamos el elemento del dia*/
                 /*Dias anteriores*/
-                for (let x = firstDayIndex-1; x > 0; x--) {
+                for (let x = firstDayIndex; x > 0; x--) {
                     days += `<div class="prev-date">${sigLastDay - x + 1}</div>`;
                 }
                 /*Dias actuales*/
-                for (let i = 1 ; i <= lastDay; i++) {
+                    for (let i = 1 ; i <= lastDay; i++) {
                     /*Si el dia, el mes y  el año es igual con la fecha del bucle le ponemos el estilo de la clase today*/
                     if (i === new Date().getDate() && date.getMonth() === new Date().getMonth() && date.getFullYear() === new Date().getFullYear()) {
                         days += `<div class="today">${i}</div>`;/*Le añadimos el atributo class con today*/
@@ -183,13 +183,13 @@
             <i class="fas fa-angle-right next"></i>
         </div>
         <div class="weekdays">
+            <div>D</div>
             <div>L</div>
             <div>M</div>
             <div>X</div>
             <div>J</div>
             <div>V</div>
             <div>S</div>
-            <div>D</div>
         </div>
         <div class="days"></div>
     </div>
