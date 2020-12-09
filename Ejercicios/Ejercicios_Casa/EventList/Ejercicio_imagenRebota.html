@@ -38,12 +38,18 @@
             top: 0; left: 0; bottom: 0; right: 0;
             background-color: #21245b;
         }
+        h1{
+            color: #0025ff;
+            text-align: center;
+        }
     </style>
 
 </head>
-<body onload="start(1)">
+<body>
+
+    <h1>HAZ CLICK A LA AIMAGEN!!!!!</h1>
     <div id="content">
-        <img src="https://www.elby.ch/img/logo/logo-clonedvd.svg" id="object" alt="eclipse"/>
+        <img src="https://www.elby.ch/img/logo/logo-clonedvd.svg" id="object" alt="eclipse" onclick="start(1)"/>
     </div>
 
     <script type="text/javascript">
@@ -51,15 +57,13 @@
         const c = document.getElementById('content');
         const positionC = c.getBoundingClientRect();
         //Ajustamos la barrera
-        let wC = positionC.width-150;
-        let hC = positionC.height-150;
+        let wC = positionC.width-150;//Restamos los px de la imagen
+        let hC = positionC.height-150;//Restamos los px de la imagen
         //----------------------------Img
         const i = document.getElementById('object');
         //Posicion aleatoria
         let xI = Math.random() * (wC - 1) + 1;
         let yI = Math.random() * (hC - 1) + 1;
-        //Velociadad inicial
-        let vel = 2;
         //-----------------Controls
         let controlX = 0;//Mientras los controladores esten en 0 significa que no han chocado con el limite, 1 significa que ha tocado barrera.
         let controlY = 0;
@@ -67,16 +71,14 @@
         let colors = ['red','blue','purple','yellow','black','white'];
         //----------------------------Animacion
         function mvImg(multi){
-            //Esta varaible elegira un numero aleatorio del rango que modificara la velocidad de la imagen
-            let r = Math.floor(Math.random() * (multi - 1)) + 1;
             //Variable donde se almacena el numero aleatorio de los colores
             let randColor;
 
             //-----Y
             if (controlY===0){
-                yI+=vel+r;//Velocidad + bost
+                yI+=multi;//Velocidad + bost
             }else{//A chocado
-                yI-=vel+r;//Velocidad + bost
+                yI-=multi;//Velocidad + bost
             }
             //Si la imagen ha tocado la barrera, se vuelve 0 para que no se salga de la barrera (Barrear de Arriba)
             if(yI<=0){
@@ -92,9 +94,9 @@
 
             //--------X
             if (controlX===0){
-                xI+=vel+r;//Velocidad + bost
+                xI+=multi;//Velocidad + bost
             }else{//A chocado
-                xI-=vel+r;//Velocidad + bost
+                xI-=multi;//Velocidad + bost
             }
             //Si la imagen ha tocado la barrera, se vuelve 0 para que no se salga de la barrera (Barrera de la Izquierda)
             if(xI<=0){
@@ -110,8 +112,10 @@
         }
 
         function start(multi){
+            //Sumar velocidad
+            multi += multi;
             //Intervalo
-            let animation = setInterval("mvImg("+multi+")",3);
+            let animation = setInterval("mvImg("+multi+")",6);
         }
 
     </script>
