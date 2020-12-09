@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ANIMACION DVD</title>
+    <style type="text/css">
+        body {
+            margin: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(-45deg, #e20e0e,#d03c00, #ffffff, #5bbf27);
+            background-size: 400% 400%;
+            animation: gradiente 15s ease infinite;
+        }
+
+        @keyframes gradiente {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        #object{
+            position: relative;
+            display: inline-block;
+            height: 150px;
+        }
+        #content {
+            box-shadow: 0px 0px 20px lightgray inset;
+            height: 80%;
+            width: 80%;
+            margin: auto;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background-color: #21245b;
+        }
+    </style>
+
+</head>
+<body onload="start(1)">
+    <div id="content">
+        <img src="https://www.elby.ch/img/logo/logo-clonedvd.svg" id="object" alt="eclipse"/>
+    </div>
+
+    <script type="text/javascript">
+        //----------------------------Contenedor
+        const c = document.getElementById('content');
+        const positionC = c.getBoundingClientRect();
+        //Ajustamos la barrera
+        let wC = positionC.width-150;
+        let hC = positionC.height-150;
+        //----------------------------Img
+        const i = document.getElementById('object');
+        //Posicion aleatoria
+        let xI = Math.random() * (wC - 1) + 1;
+        let yI = Math.random() * (hC - 1) + 1;
+        //Velociadad inicial
+        let vel = 2;
+        //-----------------Controls
+        let controlX = 0;//Mientras los controladores esten en 0 significa que no han chocado con el limite, 1 significa que ha tocado barrera.
+        let controlY = 0;
+        //-----------------Colors
+        let colors = ['red','blue','purple','yellow','black','white'];
+        //----------------------------Animacion
+        function mvImg(multi){
+            //Esta varaible elegira un numero aleatorio del rango que modificara la velocidad de la imagen
+            let r = Math.floor(Math.random() * (multi - 1)) + 1;
+            //Variable donde se almacena el numero aleatorio de los colores
+            let randColor;
+
+            //-----Y
+            if (controlY===0){
+                yI+=vel+r;//Velocidad + bost
+            }else{//A chocado
+                yI-=vel+r;//Velocidad + bost
+            }
+            //Si la imagen ha tocado la barrera, se vuelve 0 para que no se salga de la barrera (Barrear de Arriba)
+            if(yI<=0){
+                controlY=0;
+                yI=0;
+            }else if(yI>hC){//Ha superado la (Barrera de Abajo)
+                randColor = Math.floor(Math.random() * (4 - 0)) + 0;
+                i.style.backgroundColor = colors[randColor];//Cada vez que choca cambia de color
+                controlY=1;//Se a chocado
+                yI=hC;//Bajan hasta abajo del todo
+            }
+            i.style.top = `${yI}px`;//Editamos el stylo de la imagen
+
+            //--------X
+            if (controlX===0){
+                xI+=vel+r;//Velocidad + bost
+            }else{//A chocado
+                xI-=vel+r;//Velocidad + bost
+            }
+            //Si la imagen ha tocado la barrera, se vuelve 0 para que no se salga de la barrera (Barrera de la Izquierda)
+            if(xI<=0){
+                controlX=0;
+                xI=0;
+            }else if(xI>wC){//Ha superado la (Barrera de la Derecha)
+                randColor = Math.floor(Math.random() * (4 - 0)) + 0;
+                i.style.backgroundColor = colors[randColor];
+                controlX=1;//Se a chocado
+                xI=wC;//Se van hasta la derecha del todo
+            }
+            i.style.left = `${xI}px`;//Editamos el stylo de la imagen
+        }
+
+        function start(multi){
+            //Intervalo
+            let animation = setInterval("mvImg("+multi+")",3);
+        }
+
+    </script>
+</body>
+</html>
