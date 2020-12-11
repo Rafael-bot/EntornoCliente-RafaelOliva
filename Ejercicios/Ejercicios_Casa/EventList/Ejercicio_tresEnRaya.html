@@ -1,0 +1,425 @@
+<head>
+    <style type="text/css">
+        body {
+            background-color: #8d86a6;
+        }
+
+        td {
+            width: 100px;
+            height: 100px;
+            border: 4px solid #190d4a;
+            font-size: 60px;
+            text-align: center;
+        }
+
+        #tablero {
+            border-radius: 9px;
+            background-color: #373da2;
+            position: absolute;
+            top: 10%;
+            left: 40%;
+            margin-top: 10%;
+            margin-left: 1%;
+        }
+
+        .btn {
+            border-radius: 3px;
+            color: #633ea2;
+            margin: auto;
+            font-weight: bold;
+        }
+
+        #menu {
+            position: absolute;
+            left: 47%;
+        }
+
+        #mensaje {
+            font-size: 2em;
+            color: #ff6073;
+            margin-top: 10%;
+            text-align: center;
+        }
+
+        #marcadorJI,#marcadorJJ{
+            position: absolute;
+            left: 48%;
+            text-align: center;
+            font-size: 2em;
+            color: #ff0000;
+            text-align: center;
+        }
+        #reset{
+            position: absolute;
+            left: 48%;
+            text-align: center;
+            font-size: 1em;
+            color: #fd7e51;
+            text-align: center;
+        }
+
+    </style>
+    <script type="text/javascript">
+        //Array de las posiciones de las celdas
+        let pos = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+        //Variable donde almacenamo que jugador esta jugando
+        let jugador = 1;
+        //Aqui guardaremos los numeros de jugadores que van a participar
+        let njugadores = 0;
+        //Marcador JI
+        let jvi = [0,0];
+        //Marcador JJ
+        let jvj = [0,0];
+        //Funcion de volver al menu. Te lleva al menu principal
+        function reset() {
+            //Elementos
+            const menu = document.getElementById("menu");
+            const volver = document.getElementById("pregunta");
+            const mensaje = document.getElementById("mensaje");
+            const tablero = document.getElementById("tablero");
+            const marcaJI = document.getElementById('marcadorJI');
+            const marcaJJ = document.getElementById('marcadorJJ');
+            const rest = document.getElementById('reset');
+            //Desocultamos el menu
+            menu.removeAttribute("hidden", "hidden");
+            //Oocultamos el boton de volver a jugar
+            volver.setAttribute("hidden", "hidden");
+            //Ocultamos el mensaje de información
+            mensaje.setAttribute("hidden", "hidden");
+            //Ocultamos el tablero
+            tablero.setAttribute("hidden", "hidden");
+            //Ocultamos el marcadores
+            marcaJI.setAttribute("hidden", "hidden");
+            marcaJJ.setAttribute("hidden", "hidden");
+            //Ocultamos el reset del marcador
+            rest.setAttribute('hidden','hidden')
+            //Le indicamos al jugador que ya puede mover
+            mensaje.textContent = "Haz tu primer movimiento";
+            jugador = 1;
+            njugadores = 0;
+            eleccion = 0;
+            //Vaciamos la posiciones
+            pos = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+            //Rellenamos la tabla
+            dibujar();
+        }
+
+        //Funcion eleccion de modo de juego
+        function jugadores(num) {
+            //Elementos
+            const menu = document.getElementById("menu");
+            const mensaje = document.getElementById("mensaje");
+            const tablero = document.getElementById("tablero");
+
+            //Con esta variable decidimos si jugaremos contra jugador o contra la IA
+            njugadores = num;//Si es 1 contro la IA y si es 2 contra jugador
+            eleccion = 1;//Empieza el jugador
+            tablero.removeAttribute("hidden", "hidden");//Mostramos el tablero
+            mensaje.removeAttribute("hidden", "hidden");//Mostramos el mensaje de info
+            //Insertamos el boton de volver a jugar una vez empezado la partida
+            document.getElementById('final').innerHTML = '<button id="pregunta" type="button" onclick="reset()" class="btn btn-warning">Volver</button>';
+            //Mostramos el Mrcador
+            marcador();
+            //Empieza el juego
+            jugar();
+            //Ocultamos el menu
+            menu.setAttribute("hidden", "hidden");
+        }
+
+        //Funcion donde se dibuja la X o O
+        function dibujar() {
+            //Recorremos todas las posiciones
+            for (let i = 0; i < 9; i++) {
+                const celda = document.getElementById("celda" + i);
+                //Si la celda es 0 significa que no esta ocupada lo rellenamoas de texto vacio
+                if (pos[i] == 0) {
+                    celda.textContent = "";
+                } else if (pos[i] == 1) {//La celda esta ocupada
+                    celda.textContent = "X";//Lo rellenamos por la X
+                    celda.style.color = "#BD00FE";
+                } else {
+                    celda.textContent = "O";//Lo rellenamos por la O
+                    celda.style.color = "#8cc612";
+                }
+            }
+        }
+
+        //Funcion con la que decidimos el final de la partida
+        function final() {
+            //Variable donde contamos las casillas vacias, el tope es 9
+            let espacios = 0;
+            for (let i = 0; i < pos.length; i++) {
+                if (pos[i] == 0) {//Si la posicion esta vacia sumamos los espacios
+                    espacios++;
+                }
+            }
+            //Todas la horinzotales
+            for (let a = 0; a < 8; a += 3) {
+                if (pos[a] == pos[a + 1] && pos[a + 1] == pos[a + 2] && pos[a] > 0) {
+                    return pos[a];
+                }
+            }
+            //Las tres verticales
+            for (let b = 0; b < 3; b++) {
+                if (pos[b] == pos[b + 3] && pos[b + 3] == pos[b + 6] && pos[b] > 0) {
+                    return pos[b];//Retornamos las posicion ganadora
+                }
+            }
+            if (pos[0] == pos[4] && pos[4] == pos[8] && pos[0] > 0) {//Diagonal de izquierda a derecha
+                return pos[0];//Retornamos las posicion ganadora
+            }
+            if (pos[2] == pos[4] && pos[4] == pos[6] && pos[2] > 0) {//Diagonal de derecha a izquierda
+                return pos[2];//Retornamos las posicion ganadora
+            }
+            if (espacios == 9) {//Esta todas las casilla vacias
+                return espacios;
+            }
+            if (espacios == 0) {//Esta todas las casillas ocupadas
+                return espacios;
+            }
+        }
+
+        //Funcion con la que editamos los mensajes de información al usuario
+        function editCelda(celda) {
+            //Elementos
+            const mensaje = document.getElementById("mensaje");
+            const tablero = document.getElementById("tablero");
+            //Si el numero de jugadores es igual a 1 jugara contra la maquina
+            if (njugadores == 1) {
+                mensaje.textContent = "Juegas tu";
+            } else {
+                //Si el jugador es 1 significa que ha movido y le toca al jugador  2
+                if (jugador == 1) {
+                    mensaje.textContent = "Turno del jugador 2";
+                } else {
+                    mensaje.textContent = "Turno del jugador 1";
+                }
+            }
+            //Si la posición es diferente que 0 significa que esta ocupada
+            if (pos[celda] != 0) {
+                mensaje.textContent = "Estas ciego. NO VES QUE ESTA OCUPADA!!!!!";
+            } else if (jugador == 1) {//Si el jugador es 1 significa que es el jugador 1
+                pos[celda] = 1;//Rellenamos la posicion del tablero con el numero del jugador 1
+                jugador = 2;//Cambiamos de jugador, le damos el numero del jugador 2
+            } else {
+                pos[celda] = 2;//Rellenamos la posicion del tablero con el numero del jugador 2
+                jugador = 1;//Cambiamos de jugador, le damos el numero del jugador 1
+            }
+            //Dibujamos la tabla
+            dibujar();
+            switch (final()) {//Retornara un numero que sera el caso
+                case 0://Caso de empate, si retorna 0
+                    mensaje.textContent = "Empate";
+                    /*pregunta();//Volver*/
+                    actMarcador(njugadores);
+                    //Ocultamos el tablero
+                    tablero.setAttribute("hidden", "hidden");
+                    break;
+                case 1://Caso de que has ganado ,el jugador 1 o la maquina
+                    if (njugadores == 1) {//Un jugador
+                        if (eleccion == 1) {
+                            mensaje.textContent = "Has ganado!!!";
+                            jvi[0]++;
+                            actMarcador(njugadores);
+                            //Ocultamos el tablero
+                            tablero.setAttribute("hidden", "hidden");
+                        } else {
+                            mensaje.textContent = "Ordenador gana";
+                            jvi[1]++;
+                            actMarcador(njugadores);
+                            //Ocultamos el tablero
+                            tablero.setAttribute("hidden", "hidden");
+                        }
+                    } else {//Dos jugadores
+                        mensaje.textContent = "Gana Jugador 1";
+                        jvj[0]++;
+                        actMarcador(njugadores);
+                        //Ocultamos el tablero
+                        tablero.setAttribute("hidden", "hidden");
+                    }
+                    break;
+                case 2://Caso de que has ganado ,el jugador 2 o la maquina
+                    if (njugadores == 1) {//Un jugador
+                        if (eleccion == 2) {
+                            mensaje.textContent = "Has ganado!!!";
+                            jvi[0]++;
+                            actMarcador(njugadores);
+                            //Ocultamos el tablero
+                            tablero.setAttribute("hidden", "hidden");
+                        } else {
+                            mensaje.textContent = "Ordenador gana";
+                            jvi[1]++;
+                            actMarcador(njugadores);
+                            //Ocultamos el tablero
+                            tablero.setAttribute("hidden", "hidden");
+                        }
+                    } else {//Dos jugadores
+                        mensaje.textContent = "Gana Jugador 2";
+                        jvj[1]++;
+                        actMarcador(njugadores);
+                        //Ocultamos el tablero
+                        tablero.setAttribute("hidden", "hidden");
+                    }
+                    /*pregunta();*/
+                    break;
+                default:
+                    if (njugadores == 1 && jugador != eleccion) {// Jugador vs IA
+                        jugar();//Llamamos a la funcion del juego
+                    }
+
+            }
+        }
+        //Funcion donde la partida empieza IA
+        function jugar() {
+           if (jugador == 2) {//Va a empezar despues del jugador
+                if (!jugadaIA(2)) {
+                    if (!jugadaIA(1)) {
+                        if (pos[4] == 0) {
+                            editCelda(4);
+                        } /*else if (esigual(pos, [0, 0, 0, 0, 1, 0, 0, 0, 0])) {//Si la posicion es igual a la posicion del jugador
+                            editCelda(8);//posicion 8
+                        } */else if ((pos[0] == 1 || pos[2] == 1 || pos[6] == 1 || pos[8] == 1) && pos[1] == 0) {//Si algunas de esta posicion esta ocupada por el jugador, menos la segunda posicion
+                            editCelda(1);//Seguna posicion
+                        } else if ((pos[0] == 1 || pos[2] == 1 || pos[6] == 1 || pos[8] == 1) && pos[3] == 0) {//Si algunas de esta posicion esta ocupada por el jugador, menos la primera posicion
+                            editCelda(3);//Cuarta posición
+                        } /*else if (esigual(pos, [0, 1, 0, 0, 2, 0, 0, 1, 0]) || esigual(pos, [0, 0, 0, 1, 2, 1, 0, 0, 0])) {
+                            editCelda(2);
+                        } */else {
+                            editCelda(pos.indexOf(0));//Posicion de celdas vacias
+                        }
+                    }
+                }
+            }
+        }
+
+        //Funcion de la mentalidad de la IA
+        function jugadaIA(num) {
+            let finalizado = false;
+            let trio = [0, 0, 0];
+
+            for (let a = 0; a < 8; a += 3) {
+                trio[0] = pos[a];
+                trio[1] = pos[a + 1];
+                trio[2] = pos[a + 2];
+                let primera = trio.indexOf(num);
+                let ultima = trio.lastIndexOf(num);
+                let cero = trio.indexOf(0);
+                if (primera != ultima && cero != -1) {
+                    editCelda(a + cero);
+                    return true;
+                }
+            }
+            for (let b = 0; b < 3; b++) {
+                trio[0] = pos[b];
+                trio[1] = pos[b + 3];
+                trio[2] = pos[b + 6];
+                let primeraa = trio.indexOf(num);
+                let ultimaa = trio.lastIndexOf(num);
+                let ceroa = trio.indexOf(0);
+                if (primeraa != ultimaa && ceroa != -1) {
+                    editCelda(b + ceroa * 3);
+                    return true;
+                }
+            }
+            trio[0] = pos[0];
+            trio[1] = pos[4];
+            trio[2] = pos[8];
+            let cerof = trio.indexOf(0);
+            if (trio.indexOf(num) != trio.lastIndexOf(num) && cerof != -1) {
+                editCelda(cerof * 4);
+                return true;
+            }
+            trio[0] = pos[2];
+            trio[1] = pos[4];
+            trio[2] = pos[6];
+            cerof = trio.indexOf(0);
+            if (trio.indexOf(num) != trio.lastIndexOf(num) && cerof != -1) {
+                editCelda(2 * cerof + 2);
+                return true;
+            }
+        }
+
+        //Funcion que comprueba las posiciones
+        function esigual(a1, a2) {
+            igual = true;//True si son iguales
+            for (var i = 0; i < a1.length; i++) {
+                if (a1[i] != a2[i]) igual = false;//False no son correctas
+            }
+            return igual;
+        }
+
+        //Funcion del marcador
+        function marcador(){
+            const marcaJI = document.getElementById('marcadorJI');
+            const marcaJJ = document.getElementById('marcadorJJ');
+            const rest = document.getElementById('reset');
+            if (njugadores===1){
+                marcaJI.removeAttribute('hidden','hidden');
+                marcaJI.innerHTML = `<p id="mji">${jvi[0]}-${jvi[1]}</p>`;
+            }else{
+                marcaJJ.removeAttribute('hidden','hidden');
+                marcaJJ.innerHTML = `<p id="mjj">${jvj[0]}-${jvj[1]}</p>`;
+            }
+            rest.removeAttribute('hidden','hidden');
+        }
+        //Funcion actualiza el marcador
+        function actMarcador(nJ){
+            if (njugadores===1){
+                document.getElementById('mji').innerHTML = `${jvi[0]}-${jvi[1]}`;
+            }else{
+                document.getElementById('mjj').innerHTML = `${jvj[0]}-${jvj[1]}`;
+            }
+        }
+        //Funcion de reset en el marcador
+        function resetMarcador(){
+            if (njugadores===1){
+                jvi[0]=0;
+                jvi[1]=0;
+                document.getElementById('mji').innerHTML = `${jvi[0]}-${jvi[1]}`;
+            }else{
+                jvj[0]=0;
+                jvj[1]=0;
+                document.getElementById('mjj').innerHTML = `${jvj[0]}-${jvj[1]}`;
+            }
+        }
+    </script>
+</head>
+<body>
+<div>
+    <div id="marcadorJI" hidden="true"></div>
+    <div id="marcadorJJ" hidden="true"></div>
+    <p id="reset" onclick="resetMarcador()" hidden="true">Reset</p>
+</div>
+
+<div id="cabecera">
+    <div id="menu">
+        <button type="button" onclick="jugadores(1)" class="btn">J VS IA</button>
+        <button type="button" onclick="jugadores(2)" class="btn">J1 vs J2</button>
+    </div>
+</div>
+<div>
+    <div id="final"></div>
+    <div id="mensaje" hidden="true">Haz tu primer movimiento</div>
+</div>
+<div>
+    <div id="tablero" hidden="true">
+        <table>
+            <tr>
+                <td id="celda0" onclick="editCelda(0)"></td>
+                <td id="celda1" onclick="editCelda(1)"></td>
+                <td id="celda2" onclick="editCelda(2)"></td>
+            </tr>
+            <tr>
+                <td id="celda3" onclick="editCelda(3)"></td>
+                <td id="celda4" onclick="editCelda(4)"></td>
+                <td id="celda5" onclick="editCelda(5)"></td>
+            </tr>
+            <tr>
+                <td id="celda6" onclick="editCelda(6)"></td>
+                <td id="celda7" onclick="editCelda(7)"></td>
+                <td id="celda8" onclick="editCelda(8)"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
