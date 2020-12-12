@@ -30,16 +30,12 @@
             let td = document.createElement('td');//Creamos el elemento td
             let tr = document.createElement('td');//Creamos el elemento tr
            if (miembros.indexOf(',')>=0 && numGroup>=0){
-
+                miembros = miembros.split(',');
                  for (let g = 0;g<numGroup;g++){//Recorremos las veces del numero de grupo que ha indicado el usuario
-                      //let pos = [numGroup];//Guardamos la posicion del miembro en  el array
-                      //pos[g] = new Array(miembros.length);
-                      //console.log(miembros)
                           td.append(`Grupo${g+1}: ${mezclador(miembros)}`);
                           tr.append(td);
                           tableGroup.append(tr);
                   }
-
             } else if(miembros===''){
                alert('Error, no se ha encontrado miembros');
            }else if (miembros.indexOf(',')==-1) {
@@ -50,7 +46,7 @@
         //Funcion mezcla los miembros
         function mezclador(m) {
             for (let cont = 0; cont < m.length; cont++) {
-                let r = Math.floor(Math.random() * (cont + 1));
+                let r = Math.floor(Math.random() * (cont + 0));
                 let temp = m[cont];
                 m[cont] = m[r];
                 m[r] = temp;
