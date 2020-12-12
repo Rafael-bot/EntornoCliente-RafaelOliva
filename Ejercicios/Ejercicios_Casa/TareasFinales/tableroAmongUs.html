@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AmongUs</title>
+    <style>
+        #tablero {
+            background: #9b9b9b;
+            height: 570px;
+            width: 99.5%;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+        }
+
+        #j {
+            position: absolute;
+            left: 30%;
+            width: 40%;
+            height: 5%;
+            background: #5bbf27;
+            border: none;
+            top: 17%;
+        }
+
+        #rojo, #amarillo, #azul, #morado, #naranja, #verde, #turquesa, #negro, #azulmarino {
+            width: 200px;
+            height: 50px;
+            margin: auto;
+            display: flex;
+            text-align: center;
+            align-items: center;
+        }
+        #rojo {
+            background-color: red;
+            color: blue;
+        }
+
+        #amarillo {
+            background-color: yellow;
+            color: black;
+        }
+
+        #azul {
+            background-color: blue;
+            color: white;
+        }
+
+        #morado {
+            background-color: purple;
+            color: white;
+        }
+
+        #naranja {
+            background-color: orange;
+            color: black;
+        }
+
+        #verde {
+            background-color: green;
+            color: blue;
+        }
+
+        #turquesa {
+            background-color: teal;
+            color: white;
+        }
+
+        #negro {
+            background-color: black;
+            color: white;
+        }
+
+        #azulmarino {
+            background-color: cornflowerblue;
+            color: white;
+        }
+    </style>
+    <script>
+        let jugadores = [
+            {'nombre':'','voting':false,'id':'rojo'},
+            {'nombre':'','voting':false,'id':'amarillo'},
+            {'nombre':'','voting':false,'id':'azul'},
+            {'nombre':'','voting':false,'id':'morado'},
+            {'nombre':'','voting':false,'id':'naranja'},
+            {'nombre':'','voting':false,'id':'verde'},
+            {'nombre':'','voting':false,'id':'turquesa'},
+            {'nombre':'','voting':false,'id':'negro'},
+            {'nombre':'','voting':false,'id':'azulmarino'},
+        ];
+
+        //Funcion donde pedimos los jugadores
+        function play() {
+            let jugador = prompt('Introduce 9 jugadores, separados por comas').split(',');
+            if (jugador.length == 9) {
+                asigEquip(jugador);
+            } else {
+                alert('Error, NO HAY 9 JUGADORES');
+            }
+
+        }
+        //Funcion asignamos colores
+        //Ejemplo para usar -> Rafael,manolo,paco,jose,gabri,kike,enri,kiko,juan
+        function asigEquip(players) {
+            let tablero = document.getElementById('tablero');//Tablero
+            let random;//Variable de numero aleatorio
+            for (let cont = 0;cont<9;cont++){//Recorremos todos los jugadores y los vamos añadiendo a un p.
+                let div = tablero.children[cont];
+                div.setAttribute('onclick','controlVoting(this)');
+                random = Math.floor(Math.random() * (players.length - 0) + 0);//Seleccionamos un jugador aleatorio
+                let p = document.createElement('p').value = players[random];
+                div.append(p);
+                jugadores[cont].nombre = players[random];
+                players.splice(random,1);
+            }
+            document.getElementById('j').setAttribute('hidden', 'hidden');
+            console.log(jugadores);
+            alert('Ya puedes votar!!!')
+        }
+        //FUncion que controla el voto
+        function controlVoting(elemento){
+            for (let cont = 0; cont <9;cont++){
+                if(jugadores[cont].id===elemento.getAttribute('id')){
+                    if (jugadores[cont].voting===true){
+                        alert(`Ya ha sido votado`)
+                    } else {
+                        voting(elemento);
+                    }
+                }
+            }
+        }
+        //Funcion de votar
+        function voting(elemento) {
+            for (cont = 0;cont<9;cont++){
+                if(jugadores[cont].id===elemento.getAttribute('id')){
+                    jugadores[cont].voting =true;
+                    elemento.style.border = '5px solid white'
+                }
+            }
+            console.log(jugadores);
+        }
+    </script>
+</head>
+<body>
+<div id="tablero">
+    <div id="rojo"></div>
+    <div id="amarillo"></div>
+    <div id="azul"></div>
+    <div id="morado"></div>
+    <div id="naranja"></div>
+    <div id="verde"></div>
+    <div id="turquesa"></div>
+    <div id="negro"></div>
+    <div id="azulmarino"></div>
+</div>
+<button onclick="play()" id="j">Play</button>
+</body>
+</html>
